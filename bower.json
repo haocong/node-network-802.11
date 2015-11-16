@@ -1,0 +1,29 @@
+{
+  "name": "802_11",
+  "authors": [
+    "haocong <haocong.xu@gmail.com>"
+  ],
+  "description": "802.11 frame encapsulation",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "network",
+    "frame"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.1.0",
+    "iron-elements": "~1.0.4",
+    "paper-elements": "~1.0.5",
+    "neon-elements": "PolymerElements/neon-elements#~1.0.0",
+    "page": "~1.6.4"
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>IEEE 802.11帧封装</title>
+
+    <!-- Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Web Components -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="elements/elements.html">
+
+    <style>
+
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+
+    </style>
+  </head>
+
+  <body class="fullbleed layout vertical" unresolved>
+
+    <template is="dom-bind" id="app">
+
+      <paper-drawer-panel id="paperDrawerPanel">
+        <div drawer>
+          <paper-menu selected="[[selected]]">
+            <paper-item><iron-icon icon="icons:description"></iron-icon>作业说明<paper-ripple></paper-ripple></paper-item>
+            <paper-item><iron-icon icon="icons:code"></iron-icon>解决方案<paper-ripple></paper-ripple></paper-item>
+          </paper-menu>
+        </div>
+        <neon-animated-pages class="flex" selected="[[selected]]" main>
+          <main-page id="main">
+            <div>
+              <paper-fab id="circle" icon="icons:add" mini on-click="fabClicked"></paper-fab>
+              <div class="description">
+                <h2>IEEE 802.11帧封装程序</h2>
+                <p>开发一个IEEE802.11数据帧封装程序，实现以下功能：将文本内容（见附件）封装在帧体字段，如果超出最大帧要求需拆分，执行32位CRC校验，并显示每个帧的各字段内容。 
+                要求：</p> 
+                <p>（1）允许实现为命令行程序（85分封顶），或图形化程序（100分封顶）。</p> 
+                <p>（2）在Windows平台上实现，编程语言不作限制。</p> 
+                <p>（3）程序代码有良好的编程规范与注释。</p> 
+                <p>（4）撰写说明文档，包括编程环境、关键问题、解决思路、程序流程、测试结果截图等。</p> 
+                <p>（5）提交内容：程序源码、可执行文件与说明文档。</p>
+              </div>
+              <paper-dialog id="modal" 
+                            entry-animation="fade-in-animation"
+                            exit-animation="fade-out-animation"
+                            modal>
+                <h2>输入参数</h2>
+                <p>选择文件：<input type="file" id="file"></p>
+                <paper-input id="input"  label="输入目的MAC地址"
+                              allowed-pattern="[a-f0-9]"
+                              maxlength="12"
+                              prevent-invalid-input>
+                </paper-input>
+                <div class="buttons">
+                  <paper-button dialog-dismiss>取消</paper-button>
+                  <paper-button dialog-confirm autofocus>确定</paper-button>
+                </div>
+              </paper-dialog>
+            </div>
+          </main-page>
+          <detail-page>
+            <div>
+              <paper-header-panel mode="cover" class="pink fit">
+                <div class="paper-header tall">
+                  <paper-icon-button icon="arrow-back" alt="arrow-back" class="back" on-click="next"></paper-icon-button>
+                  解决方案
+                </div>
+                <div class="content cover">
+                  <frame-list elevation="2" source="[[data.frames]]"></frame-list>
+                </div>
+              </paper-header-panel>
+            </div>
+          </detail-page>
+        </neon-animated-pages>
+      </paper-drawer-panel>
+      
+    </template>
+
+    <script>
+      var e802_11 = require('./802_11.js');
+      var fs = require('fs');
+    </script>
+
+    <script src="scripts/app.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="main-page">
+
+  <style>
+
+    :host {
+      @apply(--layout-horizontal);
+      @apply(--layout-center-center);
+    }
+
+    #placeholder {
+      opacity: 0;
+      background-color: var(--accent-color);
+    }
+
+    #container {
+      padding: 20px;
+    }
+
+  </style>
+
+  <template>
+    <div id="placeholder" class="fit"></div>
+    <div id="container">
+      <content select="div"></content>
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'main-page',
+
+    behaviors: [Polymer.NeonSharedElementAnimatableBehavior],
+
+    properties: {
+      animationConfig: {
+        value: function() {
+          return {
+            'entry': {
+              name: 'reverse-ripple-animation',
+              id: 'reverse-ripple',
+              toPage: this
+            },
+
+            'exit': [{
+              name: 'ripple-animation',
+              id: 'ripple',
+              fromPage: this
+            }, {
+              name: 'fade-out-animation',
+              node: this.$.container,
+              timing: {
+                delay: 150,
+                duration: 0
+              }
+            }]
+          }
+        }
+      }
+    }
+
+  });
+
+</script>

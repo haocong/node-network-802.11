@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="detail-page">
+
+  <style>
+
+    :host {
+      overflow: scroll;
+    }
+
+    #placeholder {
+      opacity: 0;
+      background-color: var(--accent-color);
+    }
+
+  </style>
+
+  <template>
+
+    <div id="placeholder" class="fit"></div>
+    <div id="container">
+      <content select="div"></content>
+    </div>
+
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'detail-page',
+
+    behaviors: [Polymer.NeonSharedElementAnimatableBehavior],
+
+    properties: {
+      animationConfig: {
+        value: function() {
+          return {
+            'entry': [{
+              name: 'ripple-animation',
+              id: 'ripple',
+              toPage: this
+            }, {
+              name: 'fade-out-animation',
+              node: this.$.placeholder,
+              timing: {
+                delay: 100
+              }
+            }, {
+              name: 'fade-in-animation',
+              node: this.$.container,
+              timing: {
+                delay: 50
+              }
+            }],
+
+            'exit': [{
+              name: 'reverse-ripple-animation',
+              id: 'reverse-ripple',
+              fromPage: this
+            }, {
+              name: 'opaque-animation',
+              node: this.$.placeholder
+            }, {
+              name: 'fade-out-animation',
+              node: this.$.container,
+              timing: {
+                duration: 0
+              }
+            }]
+          }
+        }
+      },
+
+      sharedElements: {
+        value: function() {
+          return {
+            'ripple': this.$.placeholder,
+            'reverse-ripple': this.$.placeholder
+          }
+        }
+      }
+    },
+
+    ready: function() {
+      this.frames = frames;
+    }
+
+  });
+
+</script>

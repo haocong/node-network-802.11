@@ -1,0 +1,26 @@
+{
+  "main": "index.html",
+  "name": "netWork-Frame",
+  "description": "802.11 Frame encapsulate",
+  "version": "1.0.0",
+  "window": {
+    "toolbar": false,
+    "frame": true,
+    "position": "center",
+    "width": 1200,
+    "height": 600,
+    "resizable": true
+  },
+  "webkit": {
+    "plugin": true
+  },
+  "dependencies": {
+    "crc": "^3.3.0",
+    "getmac": "^1.0.7",
+    "iconv-lite": "^0.4.13"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-nw-builder": "^1.3.1"
+  }
+}

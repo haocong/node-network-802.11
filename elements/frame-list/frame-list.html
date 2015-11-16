@@ -1,0 +1,107 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="frame-list">
+
+	<style>
+
+		:host {
+			@apply(--layout-vertical);
+		}
+
+		paper-card {
+			display: block;
+			margin-bottom: 20px;
+			height: 50px;
+			transition: height 0.2s;
+		}
+
+		.card-content {
+			@apply(--layout-horizontal);
+			font-size: 0.8em;
+		}
+
+		.card-content iron-icon {
+			--iron-icon-width: 18px;
+			--iron-icon-height: 18px;
+			--iron-icon-fill-color: var(--google-blue-700);
+			margin-right: 8px;
+		}
+
+		.card-content span {
+			text-align: center;
+		}
+
+		.card-content span.fc {
+			text-align: left;
+		}
+
+		.card-content #fb {
+			text-align: left;
+		}
+
+		.card-content span.fb {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow:ellipsis;
+		}
+
+		.card-content span.fcs {
+			text-align: right;
+		}
+
+	</style>
+
+	<template>
+		<template is="dom-repeat" items="[[source]]">
+			<paper-card elevation="{{elevation}}" on-click="toggle">
+				<div class="card-content">
+					<iron-icon icon="icons:unfold-more"></iron-icon>
+					<span class="fc flex">{{item.fc}}</span>
+					<span class="did flex">{{item.did}}</span>
+					<span class="addr flex-2">{{arrayItem(item.addr, 0)}}</span>
+					<span class="addr flex-2">{{arrayItem(item.addr, 1)}}</span>
+					<span class="addr flex-2">{{arrayItem(item.addr, 2)}}</span>
+					<span class="sc flex">{{item.sc}}</span>
+					<span class="addr flex-2">{{arrayItem(item.addr, 3)}}</span>
+					<span id="fb" class="fb flex-4">{{item.fb}}</span>
+					<span class="fcs flex-2">{{item.fcs}}</span>
+				</div>	
+			</paper-card>
+		</template>
+	</template>
+
+</dom-module>
+
+<script>
+	Polymer({
+
+		is: 'frame-list',
+
+		properties: {
+			elevation: Number,
+			source: Object
+		},
+
+		arrayItem: function(change, index) {
+      // this.get(path, root) returns a value for a path
+      // relative to a root object.
+      return this.get(index, change);
+    },
+
+    toggle: (function() {
+    	var opened = 0;
+
+    	return function(e) {
+    		var content = e.target.tagName === 'SPAN' ? Polymer.dom(e.target).parentNode : e.target;
+    		var card   = Polymer.dom(content).parentNode;
+
+    		opened = (opened + 1) % 2;
+    		content.querySelector('iron-icon').icon = opened ? 'icons:unfold-less' : 'icons:unfold-more';
+    		content.querySelector('#fb').classList.toggle('fb');
+    		card.style.height = opened ? content.getBoundingClientRect()['height'] + 'px' : '50px';
+    		card.style.overflow = opened ? 'hidden' : 'auto';
+    	};
+    })()
+
+	});
+</script>
