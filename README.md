@@ -9,7 +9,9 @@ npm install -g gulp bower && npm install && bower install
 ```
 
 ### Development workflow
-Using [nw.js](https://github.com/nwjs/nw.js) to build a desktop application
+Using [nw.js](https://github.com/nwjs/nw.js) to build a desktop application.
+
+Modify gulpfile.js nw-builder options to meet your demand, the current build platform is osx64.
 #### Build
 ```sh
 gulp build
